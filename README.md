@@ -14,6 +14,10 @@
   <img src="https://img.shields.io/badge/One_Key-Setup-FFC107?style=for-the-badge&logoColor=white&labelColor=1a1a2e">
 </p>
 
+<p align="center">
+  <a href="https://kinora-steel-delta.vercel.app"><strong>Live app</strong></a>
+</p>
+
 </div>
 
 ---
