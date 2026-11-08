@@ -25,7 +25,7 @@ Open `/studio` on a phone-width window. Write an idea, render one frame, then sh
 
 ## Deploy
 
-Connect the GitHub repo to Vercel and set `AI_GATEWAY_API_KEY`. The clip route allows up to 300 seconds.
+Connect the GitHub repo to Vercel and set `AI_GATEWAY_API_KEY`. The clip route allows 60 seconds, which is the cap on a fresh Vercel project. Raise `maxDuration` in `src/app/api/clip/route.ts` if the linked plan allows a longer video call.
 
 Stripe prices are shown on the landing page and are not charged yet. Connect Stripe on the Vercel project before taking payment.
 

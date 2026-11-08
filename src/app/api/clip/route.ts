@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { motionPrompt, VIDEO_MODEL } from "@/lib/drama";
 import { bytesToDataUrl, jsonError, publicModelError } from "@/lib/http";
 
-export const maxDuration = 300;
+export const maxDuration = 60;
 
 export async function POST(request: Request) {
   let body: {
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
       aspectRatio: "9:16",
       duration: 4,
       generateAudio: true,
-      abortSignal: AbortSignal.timeout(240_000),
+      abortSignal: AbortSignal.timeout(55_000),
     });
 
     const mediaType = result.video.mediaType || "video/mp4";
