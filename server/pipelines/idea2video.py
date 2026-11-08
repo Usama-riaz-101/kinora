@@ -6,6 +6,7 @@ from agents.screenwriter import Screenwriter
 from agents.character_extractor import CharacterExtractor
 from pipelines.script2video import Script2VideoPipeline
 from utils.video import concatenate_videos
+from paths import outputs_root
 
 
 ProgressCallback = Callable[[str, str, int], Awaitable[None]]
@@ -30,7 +31,7 @@ class Idea2VideoPipeline:
         Full pipeline: idea → story → scenes → videos → final concatenated video.
         Returns the path to the final video.
         """
-        outputs_dir = Path("outputs") / job_id
+        outputs_dir = outputs_root() / job_id
         outputs_dir.mkdir(parents=True, exist_ok=True)
 
         # Stage 1: Develop story

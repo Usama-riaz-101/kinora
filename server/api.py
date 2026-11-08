@@ -18,6 +18,7 @@ from pydantic import BaseModel
 from pipelines.idea2video import Idea2VideoPipeline
 from pipelines.script2video import Script2VideoPipeline
 from agents.character_extractor import CharacterExtractor
+from paths import outputs_root
 
 
 # ---------------------------------------------------------------------------
@@ -34,10 +35,9 @@ app.add_middleware(
 )
 
 # Ensure outputs directory exists on startup
-OUTPUTS_DIR = Path("outputs")
-OUTPUTS_DIR.mkdir(exist_ok=True)
+OUTPUTS_DIR = outputs_root()
 
-app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
+app.mount("/outputs", StaticFiles(directory=str(OUTPUTS_DIR)), name="outputs")
 
 
 # ---------------------------------------------------------------------------
@@ -126,8 +126,8 @@ async def run_pipeline(job_id: str, req: GenerateRequest) -> None:
             )
 
         # Convert local path to URL
-        rel_path = Path(video_path).relative_to(Path("."))
-        video_url = f"/{rel_path}"
+        rel_path = Path(video_path).resolve().relative_to(OUTPUTS_DIR.resolve())
+        video_url = f"/outputs/{rel_path.as_posix()}"
 
         job["status"] = "completed"
         job["video_url"] = video_url
